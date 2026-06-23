@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dell Inventory Management System | E-Commerce Backend</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A premium, web-based single-page application for managing Dell E-Commerce product inventory and stock availability in real-time.">
+    <meta name="author" content="Dell E-Commerce Solutions">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header>
+            <div class="logo-container">
+                <div class="dell-logo" id="dell-brand-logo">
+                    <span>D</span><span>E</span><span>L</span><span>L</span>
+                </div>
+                <div class="header-title-container">
+                    <h1 id="app-main-title">Dell Inventory Management System</h1>
+                    <span class="header-tagline">E-Commerce Backend Control</span>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <div class="live-badge" id="system-status-indicator">
+                    <span class="live-dot"></span>
+                    <span>Live Sync</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Dashboard -->
+        <section class="dashboard-grid" aria-label="Inventory Metrics">
+            
+            <!-- Total Products -->
+            <div class="stat-card" id="card-total-products">
+                <div class="stat-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Total Products</span>
+                    <span class="stat-val" id="stat-total-products">0</span>
+                </div>
+            </div>
+
+            <!-- Inventory Status -->
+            <div class="stat-card health" id="card-system-health">
+                <div class="stat-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Inventory Status</span>
+                    <span class="stat-val" id="stat-status">Optimal</span>
+                </div>
+            </div>
+
+            <!-- Last Updated Time -->
+            <div class="stat-card time" id="card-last-updated">
+                <div class="stat-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Last Updated</span>
+                    <span class="stat-val" id="stat-last-updated">00:00:00</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Main Layout Grid -->
+        <main class="main-grid">
+            
+            <!-- Left Control Panel (Forms) -->
+            <section class="control-sidebar" aria-label="Inventory Controls">
+                
+                <!-- Add Product Form -->
+                <div class="panel-card" id="panel-add-product">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <span>Add New Product</span>
+                    </h2>
+                    
+                    <form id="add-product-form" novalidate>
+                        <div class="form-group">
+                            <label for="product-name-input">Product Name</label>
+                            <div class="input-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                <input type="text" id="product-name-input" placeholder="e.g., Dell XPS 13 Plus" autocomplete="off">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary" id="btn-add-product">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            <span>Add Product</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Check Availability Form -->
+                <div class="panel-card" id="panel-check-availability">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <span>Check Availability</span>
+                    </h2>
+                    
+                    <form id="check-availability-form" novalidate>
+                        <div class="form-group">
+                            <label for="search-product-input">Product Search</label>
+                            <div class="input-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                <input type="text" id="search-product-input" placeholder="e.g., Dell Alienware" autocomplete="off">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary" id="btn-search-product">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <span>Search Product</span>
+                        </button>
+                    </form>
+
+                    <!-- Availability Status Alert Box -->
+                    <div id="search-result" class="search-result-box" role="status" aria-live="polite"></div>
+                </div>
+
+            </section>
+
+            <!-- Right Inventory Panel -->
+            <section class="inventory-panel" aria-label="Inventory Ledger">
+                <div class="inventory-header">
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
+                        <span>Inventory Ledger</span>
+                    </h2>
+                    <span id="inventory-count" class="inventory-count-badge">0 Products</span>
+                </div>
+
+                <!-- Product Grid (Populated dynamically) -->
+                <div id="products-grid" class="products-grid"></div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Custom Delete Confirmation Modal Overlay -->
+    <div class="modal-overlay" id="delete-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </div>
+                <h3 class="modal-title" id="modal-title">Confirm Deletion</h3>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove the following product from the active inventory list?</p>
+                <span id="modal-product-name" class="product-to-delete">Product Name</span>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="modal-cancel-delete">Cancel</button>
+                <button class="btn-danger" id="modal-confirm-delete">Confirm Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
